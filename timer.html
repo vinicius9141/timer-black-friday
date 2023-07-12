@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: sans-serif;
+    }
+
+    body {
+      background-color: #dbd9d9;
+    }
+
+    .cardTimer {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-content: center;
+    }
+
+    .title {
+      background-color: #000;
+      color: #fff;
+      padding: 5px;
+    }
+
+    .timer {
+      background: #fff;
+      padding: 5px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="cardTimer">
+    <div class="title">Ofertas impediveis chegando em:
+    </div>
+    <div class="timer" id="countdown"></div>
+  </div>
+
+  <script>
+    // Definir a data alvo (24 de novembro)
+    var targetDate = new Date('November 24, 2023 00:00:00').getTime();
+
+    // Atualizar o contador a cada segundo
+    var countdown = setInterval(function () {
+      // Obter a data e hora atual
+      var now = new Date().getTime();
+
+      // Calcular a diferença entre a data alvo e a atual
+      var difference = targetDate - now;
+
+      // Calcular dias, horas, minutos e segundos restantes
+      var days = Math.floor(difference / (1000 * 60 * 60 * 24));
+      var hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      var minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+      var seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+      // Exibir o contador no elemento HTML com a classe "timer"
+      document.getElementById('countdown').innerHTML = days + 'd ' + hours + 'h ' + minutes + 'm ' + seconds + 's';
+
+      // Verificar se o contador chegou a zero
+      if (difference < 0) {
+        clearInterval(countdown);
+        document.getElementById('countdown').innerHTML = 'Tempo encerrado!';
+      }
+    }, 1000);
+  </script>
+</body>
+
+</html>
